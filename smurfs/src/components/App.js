@@ -5,6 +5,7 @@ import SmurfForm from "./SmurfForm";
 import Smurfs from "./Smurfs";
 import { connect } from "react-redux";
 import { fetchsmurfs, addSmurf } from "../actions";
+import Loader from "react-loader-spinner";
 /*
  to wire this component up you're going to need a few things.
  I'll let you do this part on your own. 
@@ -40,7 +41,7 @@ class App extends Component {
             <SmurfForm {...props} addSmurf={this.props.addSmurf} />
           )}
         />
-        {this.props.fetchingSmurfs ? (
+        {!this.props.fetchingSmurfs ? (
           <Route
             exact
             path="/"
@@ -51,7 +52,9 @@ class App extends Component {
               />
             )}
           />
-        ) : null}
+        ) : (
+          <Loader type="Bars" color="#FFFFFF" height={80} width={80} />
+        )}
       </div>
     );
   }
